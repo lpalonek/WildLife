@@ -9,6 +9,11 @@ public class Cell {
 	public void setAnimal(Animal animal) {
 		this.animal = animal;
 	}
+	
+	public Animal getAnimal(){
+		return animal;
+	}
+	
 	public boolean isGrass() {
 		return grass;
 	}

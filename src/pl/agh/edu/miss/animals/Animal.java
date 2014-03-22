@@ -14,7 +14,7 @@ public class Animal {
 	protected int posX;
 	protected int posY;
 	
-	World world = World.getInstance();
+	protected World world;
 	
 	private boolean alive;
 	
@@ -24,6 +24,7 @@ public class Animal {
 	protected Animal(int x, int y){
 		this.posX = x;
 		this.posY = y;
+		world = World.getInstance();
 //		WorldMap.draw(5,6);
 //		world.setCell(posX, posY);
 	}
@@ -178,6 +179,7 @@ public class Animal {
 		double xMod = 1;
 		double yMod = 1;
 		double tmp = 0;
+//		world.getCell(posX, posY).setAnimal(null);
 		if( distX > distY){
 			yMod = distY/distX*yModifier;
 			tmp = posY;
@@ -185,6 +187,7 @@ public class Animal {
 		if( xModifier > 0)
 			for(;posX < x; posX++){
 				tmp += yMod;
+				world.getCell(posX - 1, posY).setAnimal(null);
 				posY = (int) Math.ceil(tmp);
 				try {
 					Thread.sleep(10);
@@ -192,7 +195,8 @@ public class Animal {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				WorldMap.draw(posX, posY);
+				world.getCell(posX, posY).setAnimal(this);
+//				WorldMap.draw(posX, posY);
 		}
 		else
 			for(;posX > x; posX--){
@@ -204,7 +208,7 @@ public class Animal {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				WorldMap.draw(posX, posY);
+//				WorldMap.draw(posX, posY);
 			}
 		
 		System.out.println(posX+" "+posY);
